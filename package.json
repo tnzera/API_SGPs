@@ -1,0 +1,26 @@
+{
+  "name": "api_sgps",
+  "version": "1.0.0",
+  "description": "Trabalho final API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tnzera/API_SGPs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tnzera/API_SGPs/issues"
+  },
+  "homepage": "https://github.com/tnzera/API_SGPs#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.2",
+    "nodemon": "^3.1.11",
+    "pg": "^8.16.3"
+  }
+}

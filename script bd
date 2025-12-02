@@ -1,0 +1,83 @@
+--tabela usuarios geral
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    telefone VARCHAR(20),            
+    pontos INTEGER DEFAULT 0,        
+    saldo NUMERIC(15, 2) DEFAULT 0  
+);
+
+--Aluno 2
+CREATE TABLE categorias (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    usuario_id INTEGER NOT NULL,
+    CONSTRAINT fk_categoria_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios (id) ON DELETE CASCADE
+);
+
+CREATE TABLE transacoes (
+    id SERIAL PRIMARY KEY,
+    descricao VARCHAR(255), 
+    valor NUMERIC(15, 2) NOT NULL,
+    tipo VARCHAR(10) NOT NULL CHECK (tipo IN ('receita', 'despesa')), 
+    data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    usuario_id INTEGER NOT NULL,
+    categoria_id INTEGER NOT NULL,
+    CONSTRAINT check_valor_positivo CHECK (valor > 0),
+    CONSTRAINT fk_transacao_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios (id) ON DELETE CASCADE,
+    CONSTRAINT fk_transacao_categoria FOREIGN KEY (categoria_id) REFERENCES categorias (id)
+);
+
+--Aluno 1
+CREATE TABLE lists (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    usuario_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE tasks (
+    id SERIAL PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    descricao TEXT,
+    lista_id INTEGER NOT NULL REFERENCES lists(id) ON DELETE CASCADE,
+    pontuacao INTEGER NOT NULL,
+    status VARCHAR(20) NOT NULL CHECK (status IN ('pendente', 'andamento', 'concluida'))
+);
+
+--Aluno 4
+
+CREATE TABLE tipo_compromisso (
+    id              SERIAL PRIMARY KEY,
+    usuario_id      INTEGER NOT NULL REFERENCES usuario(id) ON DELETE CASCADE,
+    nome            VARCHAR(100) NOT NULL,
+    descricao       TEXT
+);
+
+CREATE TABLE compromisso (
+    id                  SERIAL PRIMARY KEY,
+    usuario_id          INTEGER NOT NULL REFERENCES usuario(id) ON DELETE CASCADE,
+    tipo_compromisso_id INTEGER NOT NULL REFERENCES tipo_compromisso(id) ON DELETE RESTRICT,
+    titulo              VARCHAR(200) NOT NULL,
+    descricao           TEXT,
+    data_compromisso    DATE NOT NULL,
+    hora_inicio         TIME NOT NULL,
+    hora_fim            TIME NOT NULL,
+    CONSTRAINT chk_hora CHECK (hora_inicio < hora_fim)
+);
+
+--Aluno 3 
+
+CREATE TABLE IF NOT EXISTS notes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    content TEXT,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+  );
+
+CREATE TABLE IF NOT EXISTS tags (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL
+  );
