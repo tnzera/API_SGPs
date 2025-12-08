@@ -4,7 +4,7 @@ function verificarAcesso (req, res, next) {
     const token = req.get("token");
 
     if(!token) {
-        res.status(401).json({id: 401, msg:"Acesso invalido!"});
+        return res.status(401).json({id: 401, msg:"Acesso invalido!"});
     }
 
     try {

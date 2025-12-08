@@ -13,6 +13,12 @@ async function inserir(usuario) {
     return res.rows[0];
 }
 
+async function listar() {
+    const query = "SELECT * FROM usuarios";
+    const res = await pool.query(query);
+    return res.rows;
+}
+
 async function buscarPorId(id) {
     const query = "SELECT * FROM usuarios WHERE id = $1";
     const res = await pool.query(query, [id]);
@@ -29,5 +35,6 @@ module.exports = {
     buscarPorEmail,
     inserir,
     buscarPorId,
-    atualizarSaldo
+    atualizarSaldo,
+    listar
 }

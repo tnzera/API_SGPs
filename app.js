@@ -17,7 +17,7 @@ app.use(express.json());
 // --- ROTAS PÚBLICAS (Antes do Middleware) ---
 // Login e Cadastro de Usuário devem ser acessíveis sem token
 app.post('/api/login', loginController.realizarLogin);
-app.use('/api/usuarios', usuarioRouter);
+
 
 // --- BARREIRA DE SEGURANÇA ---
 // O comando abaixo "trava" tudo que vem depois dele.
@@ -26,6 +26,7 @@ app.use(authMiddleware.verificarAcesso);
 
 // --- ROTAS PRIVADAS (Depois do Middleware) ---
 // Só chega aqui se o token for válido
+app.use('/api/usuarios', usuarioRouter);
 //app.use('/api/transacoes', transacaoRouter);
 //app.use('/api/categorias', categoriaRouter);
 
