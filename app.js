@@ -7,10 +7,12 @@ const port = 3000;
 const authMiddleware = require('./middleware/auth.middleware');
 const loginController = require('./controller/login_controller');
 
+
 // 2. Imports dos Roteadores
 const usuarioRouter = require('./router/usuario_router');
+const categoriaRouter = require('./router/categoria_router');
 //const transacaoRouter = require('./router/transacao_router'); // Faltava importar
-//const categoriaRouter = require('./router/categoria_router'); // Faltava importar
+
 
 app.use(express.json());
 
@@ -27,6 +29,7 @@ app.use(authMiddleware.verificarAcesso);
 // --- ROTAS PRIVADAS (Depois do Middleware) ---
 // Só chega aqui se o token for válido
 app.use('/api/usuarios', usuarioRouter);
+app.use('/api/categorias', categoriaRouter);
 //app.use('/api/transacoes', transacaoRouter);
 //app.use('/api/categorias', categoriaRouter);
 
