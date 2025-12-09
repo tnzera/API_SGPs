@@ -2,9 +2,7 @@ const express = require('express');
 const router = express.Router();
 const usuarioController = require('../controller/usuario_controller');
 
-// /api/usuarios
-
-// Rota de Cadastro (PÚBLICA): Todo mundo precisa conseguir se cadastrar
+// Rota de Cadastro 
 router.post('/', usuarioController.inserir);
 
 // Rota de Listagem 

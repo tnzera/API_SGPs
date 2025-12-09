@@ -1,10 +1,9 @@
-// repository/usuario_repository.js
-const pool = require('../database'); // Importa a conexão que você já tem
+const pool = require('../database'); 
 
 async function buscarPorEmail(email) {
     const query = "SELECT * FROM usuarios WHERE email = $1";
     const res = await pool.query(query, [email]);
-    return res.rows[0]; // Retorna o usuário ou undefined
+    return res.rows[0]; 
 }
 
 async function inserir(usuario) {

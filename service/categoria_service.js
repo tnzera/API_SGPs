@@ -24,14 +24,13 @@ async function listarPorUsuario(usuarioId) {
 }
 
 async function atualizar(id, categoriaUpdate) {
-    // 1. Busca a categoria no banco
+    //Busca no banco
     const categoriaBanco = await categoriaRepository.buscarPorId(id);
     if (!categoriaBanco) {
         throw { id: 404, msg: "Categoria não encontrada" };
     }
 
-    // 2. Segurança: Verifica se o usuarioId informado é o dono da categoria
-    // Nota: O banco retorna 'usuario_id' (snake_case), precisamos cuidar com isso
+    // Verifica o usuarioId 
     if (categoriaBanco.usuario_id !== categoriaUpdate.usuarioId) {
         throw { id: 403, msg: "Operação não permitida" };
     }

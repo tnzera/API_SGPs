@@ -1,4 +1,3 @@
-// repository/categoria_repository.js
 const pool = require('../database');
 
 async function inserir(categoria) {

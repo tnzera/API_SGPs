@@ -1,7 +1,7 @@
 // controller/usuario_controller.js
 const usuarioService = require('../service/usuario_service');
 
-// 1. Inserir (CADASTRO) - Essencial para criar conta
+//Inserir 
 async function inserir(req, res) {
     try {
         const usuario = req.body;
@@ -12,7 +12,7 @@ async function inserir(req, res) {
     }
 }
 
-// 2. Listar Usuários (Geralmente rota protegida ou pública, depende do seu app.js)
+//Listar Usuários 
 async function listar(req, res) {
     try {
         const lista = await usuarioService.listar();
@@ -22,7 +22,7 @@ async function listar(req, res) {
     }
 }
 
-// 3. Buscar por ID
+//Buscar por ID
 async function buscarPorId(req, res) {
     try {
         const id = +req.params.id;

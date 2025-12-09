@@ -1,7 +1,5 @@
-// database.js
 const { Pool } = require('pg');
 
-// Conexão direta (Substitua pelos dados do seu banco)
 const pool = new Pool({
   user: 'postgres',
   host: 'localhost',

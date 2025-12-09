@@ -1,6 +1,5 @@
-// service/usuario_service.js
 const usuarioRepository = require('../repository/usuario_repository');
-const tokenService = require('./token_service'); // <--- Importamos o serviço de token
+const tokenService = require('./token_service'); 
 
 async function inserir(usuario) {
     if (usuario && usuario.nome && usuario.email && usuario.senha) {
@@ -11,13 +10,13 @@ async function inserir(usuario) {
 }
 
 async function verificarLogin(usuarioLogin) {
-    // 1. Busca o usuário no banco pelo email
+    //Busca o usuário no banco
     const usuarioBanco = await usuarioRepository.buscarPorEmail(usuarioLogin.email);
     
-    // 2. Verifica se achou e se a senha bate
+    //Verifica senha 
     if (usuarioBanco && usuarioBanco.senha === usuarioLogin.senha) {
         
-        // 3. Gera o Token USANDO O TOKEN_SERVICE (Muito mais limpo!)
+        //Gera o Token 
         const token = tokenService.criarToken({
             id: usuarioBanco.id,
             email: usuarioBanco.email
@@ -29,10 +28,12 @@ async function verificarLogin(usuarioLogin) {
     }
 }
 
+//http://localhost:3000/api/usuarios
 async function listar() {
-    return await usuarioRepository.listar(); // Supondo que você tenha criado essa função no repository
+    return await usuarioRepository.listar(); 
 }
 
+//http://localhost:3000/api/usuarios/1
 async function buscarPorId(id) {
     const usuario = await usuarioRepository.buscarPorId(id);
     if(usuario) return usuario;

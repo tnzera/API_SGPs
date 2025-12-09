@@ -1,4 +1,3 @@
-// controller/categoria_controller.js
 const categoriaService = require('../service/categoria_service');
 
 async function inserir(req, res) {
@@ -13,7 +12,6 @@ async function inserir(req, res) {
 
 async function listarPorUsuario(req, res) {
     try {
-        // Pega o idUsuario da URL (ex: /listarPorUsuario/1)
         const idUsuario = +req.params.idUsuario;
         const lista = await categoriaService.listarPorUsuario(idUsuario);
         res.status(200).json(lista);
@@ -25,7 +23,7 @@ async function listarPorUsuario(req, res) {
 async function atualizar(req, res) {
     try {
         const id = +req.params.id;
-        const categoria = req.body; // Deve conter { nome: "...", usuarioId: 1 }
+        const categoria = req.body; 
         const atualizado = await categoriaService.atualizar(id, categoria);
         res.status(200).json(atualizado);
     } catch (err) {
@@ -36,7 +34,7 @@ async function atualizar(req, res) {
 async function deletar(req, res) {
     try {
         const id = +req.params.id;
-        const usuarioId = +req.query.usuarioId; // Passado via Query: ?usuarioId=1
+        const usuarioId = +req.query.usuarioId; 
         const deletado = await categoriaService.deletar(id, usuarioId);
         res.status(200).json(deletado);
     } catch (err) {
